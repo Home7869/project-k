@@ -10,7 +10,10 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'automatic',
+      plugins: [['@babel/plugin-transform-runtime', { regenerator: true }]]
+    }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
