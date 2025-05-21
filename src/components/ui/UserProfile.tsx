@@ -1,7 +1,9 @@
+'use client';
 
 import React, { useState } from 'react';
 import { User } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import Link from 'next/link';
 
 // This is a mock user for demonstration
 // In a real app, this would come from an authentication system
@@ -32,17 +34,17 @@ const UserProfile: React.FC = () => {
               <div className="px-4 py-2 border-b">
                 <p className="text-sm font-medium">{mockUser.name}</p>
               </div>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 {translations[language].profile}
-              </a>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              </Link>
+              <Link href="/logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 Log out
-              </a>
+              </Link>
             </>
           ) : (
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <Link href="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               {translations[language].login}
-            </a>
+            </Link>
           )}
         </div>
       )}
