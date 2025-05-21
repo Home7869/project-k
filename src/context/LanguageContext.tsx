@@ -1,85 +1,30 @@
 'use client';
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-type LanguageType = 'en' | 'hi';
+type InterfaceType = 'farmer' | 'business';
 
-interface Translations {
-  [key: string]: {
-    [key: string]: string;
-  };
+interface InterfaceContextType {
+  interfaceType: InterfaceType;
+  setInterfaceType: React.Dispatch<React.SetStateAction<InterfaceType>>;
 }
 
-interface LanguageContextType {
-  language: LanguageType;
-  setLanguage: (lang: LanguageType) => void;
-  translations: Translations;
-}
+const InterfaceContext = createContext<InterfaceContextType | undefined>(undefined);
 
-const translations: Translations = {
-  en: {
-    appName: 'Kisan Mitra',
-    farmer: 'Farmer',
-    business: 'Business',
-    profile: 'Profile',
-    login: 'Login',
-    logout: 'Logout',
-    tomatoPrices: 'Tomato Market Prices',
-    district: 'District',
-    market: 'Market',
-    variety: 'Variety',
-    grade: 'Grade',
-    date: 'Date',
-    minPrice: 'Min Price (₹/Quintal)',
-    maxPrice: 'Max Price (₹/Quintal)',
-    modalPrice: 'Modal Price (₹/Quintal)',
-    filterPrices: 'Filter Prices',
-    allDistricts: 'All Districts',
-    allMarkets: 'All Markets',
-    enterVariety: 'Enter variety',
-    enterGrade: 'Enter grade',
-    fromDate: 'From Date',
-    toDate: 'To Date',
-    noData: 'No price data available',
-    uploadTomatoImage: 'Upload Tomato Image',
-    uploadImageDesc: 'Take a photo of your tomato crop or upload an existing image',
-    uploadImage: 'Upload Image',
-    takePhoto: 'Take Photo',
-    uploading: 'Uploading...',
-    imageUploaded: 'Image Uploaded',
-    imageUploadedDesc: 'Your image has been uploaded successfully',
-    uploadError: 'Upload Error',
-    uploadErrorDesc: 'There was an error uploading your image',
-    plantDiagnosis: 'Plant Health Diagnosis',
-    diagnosisDesc: 'Take a photo of your plant to diagnose any potential diseases or pests',
-    analyzing: 'Analyzing...',
-    newImage: 'New Image',
-    backToHome: 'Back to Home',
-    analysisComplete: 'Analysis Complete',
-    plantHealthy: 'Your plant appears healthy. No diseases detected.',
-    identifyPlantDisease: 'Identify plant diseases and get treatment recommendations'
-  },
-  hi: {
-    appName: 'किसान मित्र',
-    farmer: 'किसान',
-    business: 'व्यापारी',
-    profile: 'प्रोफाइल',
-    login: 'लॉगिन',
-    logout: 'लॉगआउट',
-    tomatoPrices: 'टमाटर बाजार मूल्य',
-    district: 'जिला',
-    market: 'बाजार',
-    variety: 'किस्म',
-    grade: 'ग्रेड',
-    date: 'तारीख',
-    minPrice: 'न्यूनतम मूल्य (₹/क्विंटल)',
-    maxPrice: 'अधिकतम मूल्य (₹/क्विंटल)',
-    modalPrice: 'औसत मूल्य (₹/क्विंटल)',
-    filterPrices: 'मूल्य फ़िल्टर करें',
-    allDistricts: 'सभी जिले',
-    allMarkets: 'सभी बाजार',
-    enterVariety: 'किस्म दर्ज करें',
-    enterGrade: 'ग्रेड दर्ज करें',
-    fromDate: 'आरंभ तिथि',
-    toDate: 'अंतिम तिथि',
-    noData: 'कोई मूल्य डेट
+export const InterfaceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [interfaceType, setInterfaceType] = useState<InterfaceType>('farmer');
+  
+  return (
+    <InterfaceContext.Provider value={{ interfaceType, setInterfaceType }}>
+      {children}
+    </InterfaceContext.Provider>
+  );
+};
+
+export const useInterface = (): InterfaceContextType => {
+  const context = useContext(InterfaceContext);
+  if (context === undefined) {
+    throw new Error('useInterface must be used within an InterfaceProvider');
+  }
+  return context;
+};
