@@ -1,3 +1,4 @@
+'use client';
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
@@ -81,45 +82,4 @@ const translations: Translations = {
     enterGrade: 'ग्रेड दर्ज करें',
     fromDate: 'आरंभ तिथि',
     toDate: 'अंतिम तिथि',
-    noData: 'कोई मूल्य डेटा उपलब्ध नहीं है',
-    uploadTomatoImage: 'टमाटर की छवि अपलोड करें',
-    uploadImageDesc: 'अपनी टमाटर फसल की तस्वीर लें या मौजूदा छवि अपलोड करें',
-    uploadImage: 'छवि अपलोड करें',
-    takePhoto: 'फोटो लें',
-    uploading: 'अपलोड हो रहा है...',
-    imageUploaded: 'छवि अपलोड की गई',
-    imageUploadedDesc: 'आपकी छवि सफलतापूर्वक अपलोड कर दी गई है',
-    uploadError: 'अपलोड त्रुटि',
-    uploadErrorDesc: 'आपकी छवि अपलोड करने में एक त्रुटि हुई थी',
-    plantDiagnosis: 'पौधे स्वास्थ्य निदान',
-    diagnosisDesc: 'किसी संभावित बीमारी या कीटों का निदान करने के लिए अपने पौधे की एक तस्वीर लें',
-    analyzing: 'विश्लेषण हो रहा है...',
-    newImage: 'नई छवि',
-    backToHome: 'होम पेज पर वापस जाएं',
-    analysisComplete: 'विश्लेषण पूर्ण',
-    plantHealthy: 'आपका पौधा स्वस्थ दिखाई दे रहा है। कोई बीमारी नहीं मिली।',
-    identifyPlantDisease: 'पौधों की बीमारियों की पहचान करें और उपचार की सिफारिशें प्राप्त करें'
-  }
-};
-
-const LanguageContext = createContext<LanguageContextType>({
-  language: 'en',
-  setLanguage: () => {},
-  translations
-});
-
-export const useLanguage = () => useContext(LanguageContext);
-
-interface LanguageProviderProps {
-  children: ReactNode;
-}
-
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<LanguageType>('en');
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, translations }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
+    noData: 'कोई मूल्य डेट
